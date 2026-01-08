@@ -84,9 +84,17 @@ strip_libs() {
 ## Packaging ##
 copy_build_artifacts() {
     echo "-- Copying artifacts..."
-	$MAKE install_dev
+	$MAKE install_dev install_modules
 
-    mkdir -p "$OUT_DIR"/include
+    # Windows doesn't install pkgconfig files
+    if [ "$PLATFORM" = windows ]; then
+        mkdir -p "$OUT_DIR"/lib/pkgconfig
+        for pc in "$ROOTDIR"/windows/pkgconfig/*; do
+            sed "s/@VERSION@/$VERSION" "$pc" > "$OUT_DIR"/lib/pkgconfig/"$(basename -- "$pc")"
+        done
+    fi
+
+    mkdir -p "$OUT_DIR"/include/openssl
 	cp "$ROOTDIR"/cert.h "$OUT_DIR"/include/openssl
 }
 
