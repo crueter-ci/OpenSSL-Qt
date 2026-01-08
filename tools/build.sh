@@ -89,7 +89,7 @@ copy_build_artifacts() {
     # Windows doesn't install pkgconfig files
     if [ "$PLATFORM" = windows ]; then
         mkdir -p "$OUT_DIR"/lib/pkgconfig
-        for pc in "$ROOTDIR"/windows/pkgconfig/*; do
+        find "$ROOTDIR"/windows/pkgconfig/ -type f | while read -r pc ; do
             sed "s/@VERSION@/$VERSION/" "$pc" > "$OUT_DIR"/lib/pkgconfig/"$(basename -- "$pc")"
         done
     fi
