@@ -90,7 +90,7 @@ copy_build_artifacts() {
     if [ "$PLATFORM" = windows ]; then
         mkdir -p "$OUT_DIR"/lib/pkgconfig
         for pc in "$ROOTDIR"/windows/pkgconfig/*; do
-            sed "s/@VERSION@/$VERSION" "$pc" > "$OUT_DIR"/lib/pkgconfig/"$(basename -- "$pc")"
+            sed "s/@VERSION@/$VERSION/" "$pc" > "$OUT_DIR"/lib/pkgconfig/"$(basename -- "$pc")"
         done
     fi
 
