@@ -96,6 +96,8 @@ copy_build_artifacts() {
 
     mkdir -p "$OUT_DIR"/include/openssl
 	cp "$ROOTDIR"/cert.h "$OUT_DIR"/include/openssl
+
+    find "$OUT_DIR" -name '*.pdb' -exec rm {} \;
 }
 
 ## Cleanup ##
