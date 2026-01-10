@@ -56,7 +56,7 @@ build() {
 
 	# ksdjbdfkjsjsdbfjhb
 	if [ "$PLATFORM" = windows ]; then
-	    export CL=" /MP"
+	    export CL=" /MP /DEBUG:NONE /Zi- /Z7-"
 
 		# microsoft
 		# shellcheck disable=SC2154
