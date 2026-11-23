@@ -32,7 +32,7 @@ configure() {
 	    ./Configure android-"${ANDROID_ARCH}" no-asm shared no-makedepend --release threads no-tests \
 			-D__ANDROID_API__="${ANDROID_API}" \
 			no-docs enable-camellia enable-ec enable-ec2m enable-sm2 enable-srp enable-idea enable-mdc2 enable-rc5 enable-rfc3779 \
-			enable-quic enable-fips --prefix="$PWD/../out" --libdir=lib no-apps
+			enable-quic enable-fips enable-pic --prefix="$PWD/../out" --libdir=lib no-apps
 
 		# bruh
 		sed -i'' -e "s|CROSS_COMPILE=|CROSS_COMPILE=${CROSS_PREFIX}\/|" Makefile
@@ -69,8 +69,9 @@ configure() {
 				fi
 				;;
 		esac
+
 		./Configure "$CONFIGURE_TARGET" no-asm shared no-makedepend --release threads no-tests \
-			no-docs enable-camellia enable-ec enable-ec2m enable-sm2 enable-srp enable-idea enable-mdc2 enable-rc5 enable-rfc3779 enable-asm \
+			no-docs enable-camellia enable-pic enable-ec enable-ec2m enable-sm2 enable-srp enable-idea enable-mdc2 enable-rc5 enable-rfc3779 enable-asm \
 			enable-quic enable-fips --prefix="$PWD/../out" --libdir=lib no-apps
 	fi
 
