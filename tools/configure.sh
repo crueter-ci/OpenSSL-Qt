@@ -71,7 +71,7 @@ configure() {
 		esac
 
 		./Configure "$CONFIGURE_TARGET" no-asm shared no-makedepend --release threads no-tests \
-			no-docs enable-camellia enable-pic enable-ec enable-ec2m enable-sm2 enable-srp enable-idea enable-mdc2 enable-rc5 enable-rfc3779 enable-asm \
+			no-docs enable-camellia enable-pic enable-ec enable-ec2m enable-sm2 enable-srp enable-idea enable-mdc2 enable-rc5 enable-rfc3779 \
 			enable-quic enable-fips --prefix="$PWD/../out" --libdir=lib no-apps
 	fi
 
