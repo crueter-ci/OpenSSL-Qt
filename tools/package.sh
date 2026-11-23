@@ -12,11 +12,20 @@ copy_build_artifacts() {
 	_group "Copying build artifacts"
 
 	cd "$DIRECTORY"
-	"${MAKE:-make}" install
+	"${MAKE:-make}" install_dev install_modules
 	cd ..
 
-	rm -rf out/lib/cmake out/lib/ossl-modules out/lib/pkgconfig out/ssl out/bin
+	# Windows doesn't install pkgconfig files
+	if [ "$PLATFORM" = windows ]; then
+		mkdir -p out/lib/pkgconfig
+		find "$ROOTDIR"/windows/pkgconfig/ -type f | while read -r pc ; do
+			sed "s/@VERSION@/$VERSION/" "$pc" > out/lib/pkgconfig/"$(basename -- "$pc")"
+		done
+	fi
+
 	cp cert.h out/include/openssl
+
+	find out -name '*.pdb' -exec rm {} \;
 
 	_end
 }
